@@ -12,15 +12,19 @@
 	</head>
 
 	<body>
-		<header>
+		<header id = "item1">
+			<img id="header-img" src="pink-globe.png" alt="Pink Globe">
 			<h1>World Database Lookup</h1>
 		</header>
 
 		<main>
 			<div id="controls">
-				<label for="country">Country:</label>
 				<input id="country" type="search" name="country" placeholder="Enter country name" />
-				<button id="lookup">Lookup</button>
+
+				<div class="lookup-buttons">
+					<button id="lookup">Lookup</button>
+					<button id="citieslookup">Lookup Cities</button>
+				</div>
 			</div>
 			
 			<div id="result">
