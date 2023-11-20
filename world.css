@@ -54,7 +54,8 @@ input{
     border: 1px solid pink;
     border-radius: 4px;
     margin-bottom: 15px;
-    
+    color: black;
+    font-weight: bold;
 }
 
 input::placeholder{
@@ -104,8 +105,10 @@ td{
 }
 
 table, tr, th, td{
-    border: 1px solid rgb(112, 74, 81);
+    border-bottom: 1px solid #ec75a1;
 }
+
+
 
 
 
