@@ -31,7 +31,6 @@ function labStarter(){
         e.preventDefault();
 
         var lookupCountry = document.getElementById("country").value;
-        var cities = document.getElementById("country").value;
         var httprequest = new XMLHttpRequest();
         var getrequest = ("world.php?country=" + lookupCountry + "&context=cities");
         

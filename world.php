@@ -5,17 +5,17 @@ $password = 'password123';
 $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-// Accept and sanitize GET variables
+// Accept and sanitize GET variables for a country
 $country = isset($_GET['country']) ? $_GET['country'] : '';
 $country = '%'.filter_var($country, FILTER_SANITIZE_STRING).'%';
 
-//check if the lookup query is for a city
+//Accept and sanitize GET variables for a city query
 $context = isset($_GET['context']) ? $_GET['context'] : '';
 $context = filter_var($context, FILTER_SANITIZE_STRING);
 
 //echo $context;
 
-//Updated query to obtain either city or country data
+//Updated query to obtain city data and joins it to the country table
 $cityquery = $conn->query("SELECT cities.name, cities.district, cities.population
                           FROM cities LEFT JOIN countries ON countries.code = cities.country_code
                           WHERE countries.name LIKE '%$country%'");
@@ -23,7 +23,7 @@ $cityquery = $conn->query("SELECT cities.name, cities.district, cities.populatio
 $cityquery->execute();
 $cityresults = $cityquery->fetchALL(PDO::FETCH_ASSOC);
 
-
+//Query for countries
 $stmt = $conn->prepare("SELECT * FROM countries WHERE name LIKE :country");
 //Combine and execute 
 $stmt->bindParam(':country', $country, PDO::PARAM_STR);
@@ -38,7 +38,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <table class = countrytable>
 
   <?php if($context == "cities"): ?>
-    <tr>
+    <tr id=row-headings>
       <th> Name </th>
       <th> District </th>
       <th> Population</th>
@@ -55,7 +55,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
   
   <?php else: ?>
-    <tr>
+    <tr id= row-headings>
       <th> Name </th>
       <th> Continent </th>
       <th> Independence </th>
